@@ -1,0 +1,16 @@
+{
+  "name": "claude-sharedserver",
+  "description": "Manage shared backend processes through the sharedserver CLI. SessionStart attaches; SessionEnd detaches.",
+  "owner": {
+    "name": "George Harker",
+    "email": "george@georgeharker.com"
+  },
+  "plugins": [
+    {
+      "name": "claude-sharedserver",
+      "source": "./claude-sharedserver",
+      "description": "Generic sharedserver lifecycle for Claude Code: reads ~/.config/claude/sharedserver.json and runs `sharedserver use`/`unuse` per Claude session.",
+      "version": "0.1.0"
+    }
+  ]
+}
