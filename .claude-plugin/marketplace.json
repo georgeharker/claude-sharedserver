@@ -10,7 +10,7 @@
       "name": "claude-sharedserver",
       "source": "./claude-sharedserver",
       "description": "Generic sharedserver lifecycle for Claude Code: reads ~/.config/claude/sharedserver.json and runs `sharedserver use`/`unuse` per Claude session.",
-      "version": "0.1.0"
+      "version": "0.2.0"
     }
   ]
 }

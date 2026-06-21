@@ -1,9 +1,8 @@
 {
   "servers": {
     "mcp-bridge": {
-      "command": "${HOME}/Development/neovim-plugins/mcp-companion/bridge/.venv/bin/python",
+      "command": "mcp-bridge",
       "args": [
-        "-m", "mcp_bridge",
         "--config", "${HOME}/.cache/secrets/${USER}.mcpservers.json",
         "--port", "9741"
       ],

@@ -52,9 +52,8 @@ The config is a single JSON file describing one or more servers. `${VAR}` env re
 {
   "servers": {
     "mcp-bridge": {
-      "command": "${HOME}/Development/neovim-plugins/mcp-companion/bridge/.venv/bin/python",
+      "command": "mcp-bridge",
       "args": [
-        "-m", "mcp_bridge",
         "--config", "${HOME}/.cache/secrets/${USER}.mcpservers.json",
         "--port", "9741"
       ],
@@ -72,6 +71,12 @@ The config is a single JSON file describing one or more servers. `${VAR}` env re
   }
 }
 ```
+
+> The `mcp-bridge` example assumes the bridge's console script is on your `PATH`.
+> Install it without hardcoding a checkout path via `uv tool install <mcp-companion>/bridge`
+> (isolated venv, `mcp-bridge` on PATH), or point `command` at a specific interpreter
+> (e.g. `"${MY_BRIDGE_VENV}/bin/python"` with `args: ["-m", "mcp_bridge", …]`). Don't
+> hardcode a personal checkout location here — it won't be portable.
 
 Per-server fields (matches the opencode plugin):
 
