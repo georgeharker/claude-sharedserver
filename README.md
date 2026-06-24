@@ -89,8 +89,24 @@ Per-server fields (matches the opencode plugin):
 | `logFile`     | `string`     | Capture server stdout/stderr to this path.                                               |
 | `metadata`    | `string`     | Optional metadata string forwarded to sharedserver.                                      |
 | `lazy`        | `boolean`    | Attach only if the server is already running; never start it.                            |
+| `skipIfEnv`   | `string`     | Name of an env var; when it is set (non-empty) this server is skipped entirely — neither started nor attached. Use it when another host already launched the process for this session. |
 
 The whole file passes through `envsubst` before parsing, so `${HOME}`, `${USER}`, `${PATH}`, etc. work in any string value.
+
+### `skipIfEnv` — when something else already launched the server
+
+If Claude Code is started by another host that has already brought the shared
+process up and points Claude at it via an env var, you don't want this plugin
+launching (or refcounting) a second one. Set `skipIfEnv` to that var's name and
+the entry is skipped whenever the var is non-empty.
+
+The canonical case is the MCP bridge under
+[mcp-companion](https://github.com/georgeharker/mcp-companion): CodeCompanion
+spawns `claude` with `MCP_COMPANION_BRIDGE_URL=…` (the same var the bridge's MCP
+client config expands as `${MCP_COMPANION_BRIDGE_URL:-…}`). With
+`"skipIfEnv": "MCP_COMPANION_BRIDGE_URL"` the bridge entry no-ops in that
+context and Claude simply connects to the bridge the editor owns; run standalone
+(var unset) it launches the bridge as usual.
 
 ## What it runs
 

@@ -7,7 +7,8 @@
         "--port", "9741"
       ],
       "gracePeriod": "30m",
-      "logFile": "${HOME}/Library/Logs/mcp-bridge.log"
+      "logFile": "${HOME}/Library/Logs/mcp-bridge.log",
+      "skipIfEnv": "MCP_COMPANION_BRIDGE_URL"
     }
   }
 }

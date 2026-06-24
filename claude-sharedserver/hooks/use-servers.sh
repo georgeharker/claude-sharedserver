@@ -37,6 +37,15 @@ while IFS= read -r entry; do
   log_file="$(jq -r '.logFile // empty' <<<"$spec")"
   metadata="$(jq -r '.metadata // empty' <<<"$spec")"
   lazy="$(jq -r '.lazy // false' <<<"$spec")"
+  skip_if_env="$(jq -r '.skipIfEnv // empty' <<<"$spec")"
+
+  # When skipIfEnv names an env var that is set (non-empty), this server has
+  # been launched for us by another host — e.g. CodeCompanion / mcp-companion
+  # injects MCP_COMPANION_BRIDGE_URL, the same var the bridge's MCP client
+  # config expands. Don't launch (or attach to) it ourselves in that context.
+  if [[ -n "$skip_if_env" && -n "${!skip_if_env:-}" ]]; then
+    continue
+  fi
 
   ss_args=(use "$name" --pid "$PPID")
   [[ -n "$grace" ]] && ss_args+=(--grace-period "$grace")
