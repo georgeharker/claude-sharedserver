@@ -34,7 +34,11 @@ Sharedserver is useful for long-lived development services that several clients 
 The plugin is just a directory you point Claude Code at via marketplace or `--plugin-dir`:
 
 ```sh
-# As a local marketplace
+# From GitHub (recommended)
+claude plugin marketplace add georgeharker/claude-sharedserver
+claude plugin install claude-sharedserver
+
+# …or from a local checkout
 claude plugin marketplace add /path/to/claude-sharedserver
 claude plugin install claude-sharedserver
 
